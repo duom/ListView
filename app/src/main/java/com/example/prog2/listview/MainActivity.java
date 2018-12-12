@@ -45,21 +45,18 @@ public class MainActivity extends AppCompatActivity {
         nombres.add("Ana");
         nombres.add("Pepito");
 
-
-//adaptador la forma visual en que mostraremos nuestros datos
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,nombres);
-
-//enlazamos nuestro adaptador con nuestro listView
-        listView.setAdapter(adapter);
+        // ASI al hacer click en cada elemento hara algo: en este caso un TOAST
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(MainActivity.this, "Clicked: "+nombres.get(position), Toast.LENGTH_SHORT).show();
             }
         });
-//
-        //enlazamos con nuesro adaptador personalizado con nuestra clase MyAdapter
-        //le damos el contexto, el layout que tenemos que mezclar y por ultimo los datos en este caso arraylist nombres.
+
+
+        //AQUI enlazamos con nuesro adaptador personalizado con nuestra clase MyAdapter
+        //le damos AL ADAPTADOR el contexto(this), el layout que tenemos que ENLAZAR(list_item que hemos creado) y por ultimo
+        // los datos en este caso arraylist nombres.
 
         MyAdapter myAdapter = new MyAdapter(this,R.layout.list_item,nombres);
         listView.setAdapter(myAdapter);

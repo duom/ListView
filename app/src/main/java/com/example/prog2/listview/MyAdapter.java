@@ -9,8 +9,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-//este sera el adaptador que coja el lyout creado personalizado y lo enchiche (layout list item)
-// hayq ue extenderlo de BaseAdapter para coger sus metods.
+//ESTE sera el adaptador CLAVE ya que coje el layout creado personalizado (layout list item)
+//y lo MEZCLA con los datos (en este caso los datos vienen de un array pero puede ser por una BBDD x ej.)
+// hay que extenderlo de BaseAdapter para coger sus metodos.
 
 public class MyAdapter extends BaseAdapter {
 
@@ -43,6 +44,7 @@ public class MyAdapter extends BaseAdapter {
     }
 
     @Override
+    //METODO CLAVE QUE MEZCLA TODO
     //coge cada elemento y se dibuja
     public View getView(int position, View convertView, ViewGroup parent) {
 
