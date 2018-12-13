@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
 //datos a mostrar
         nombres = new ArrayList<String>();
+
         nombres.add("Juan");
         nombres.add("Manolo");
         nombres.add("Ana");

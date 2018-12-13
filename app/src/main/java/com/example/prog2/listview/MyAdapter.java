@@ -25,7 +25,6 @@ public class MyAdapter extends BaseAdapter {
         this.nombres = nombres;
     }
 
-
     @Override
     //cuantas veces vamos a iterar sobre una coleccion que le vamos a dar
     //asi que le damos para que devuelva el total de elementos con el size del array
@@ -48,27 +47,46 @@ public class MyAdapter extends BaseAdapter {
     //coge cada elemento y se dibuja
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        //IMPORTANTE aqui es donde el adaptador infla el layout que hemos hecho antes (list_item) que nos servirá
-        // de plantilla para rellenar de datos.
+        //ViewHolder Pattern---> mejora la productividad--> de esta manera no tiene que cargar
+        // constantemente el findviewBYid (solo la primera vez)
 
-        //aqui copiamos la vista
-        View v =  convertView;
+// hacemos una instancia de la clase (esta abajo del todo)
+        ViewHolder holder;
+// si es null (q nunca ha salido en la app lo carga y lo guarda en holder.nameTextView)
+        if(convertView== null){
 
-        //inflamos la vista personalizada que nos ha llegado
-        LayoutInflater layoutInflater = LayoutInflater.from(this.context);
-        v=layoutInflater.inflate(R.layout.list_item, null);
+            //inflamos la vista personalizada que nos ha llegado
+
+            //IMPORTANTE aqui es donde el adaptador infla el layout que hemos hecho antes (list_item) que nos servirá
+            // de plantilla para rellenar de datos.
+            LayoutInflater layoutInflater = LayoutInflater.from(this.context);
+            convertView=layoutInflater.inflate(R.layout.list_item, null);
+
+            holder = new ViewHolder();
+            //hacemos el findView de la view que hemos inflado
+            holder.nameTextView =convertView.findViewById(R.id.textView);
+            convertView.setTag(holder);
+
+        }else{
+            holder = (ViewHolder) convertView.getTag();
+        }
 
         //ya esta inflado y ahora lo rellenamos connuestros datos dependiendo de la posicion
         String currentName = nombres.get(position);
 
-
-        //hacemos el findView de la view que hemos inflado(v)
-        TextView textView = v.findViewById(R.id.textView);
         //ahora cargamos a ese textView el texto
-        textView.setText(currentName);
+        holder.nameTextView.setText(currentName);
 
         //devolvemos la vista inflada y modificada con nuetsros datos
-        return v;
+        return convertView;
+
+    }
+
+    static class ViewHolder{
+
+//tendriamos tantos elementos como elementos de la UI quisieramos modificar.
+
+        private TextView nameTextView;
 
     }
 }
